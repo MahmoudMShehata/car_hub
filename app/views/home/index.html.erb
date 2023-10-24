@@ -1,0 +1,8 @@
+<section style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+  <h1>Car Hub!</h1>
+
+  <% if user_signed_in? %>
+    <!-- Display the sign-out button when the user is signed in -->
+    <%= link_to 'Sign Out', destroy_user_session_path, method: :get, class: 'sign-out-button' %>
+  <% end %>
+</section>
