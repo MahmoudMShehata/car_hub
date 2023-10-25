@@ -5,4 +5,6 @@
     <!-- Display the sign-out button when the user is signed in -->
     <%= link_to 'Sign Out', destroy_user_session_path, method: :get, class: 'sign-out-button' %>
   <% end %>
+
+  <%= link_to 'Create Car Quotation', new_car_form_path, class: 'create-quotation-button' %>
 </section>

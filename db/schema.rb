@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_24_220854) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_25_084158) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "car_forms", force: :cascade do |t|
+    t.string "city"
+    t.string "address"
+    t.string "phone_number"
+    t.string "email"
+    t.integer "vehicle_type"
+    t.string "vehicle_identification_number"
+    t.text "describe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
