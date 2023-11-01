@@ -1,4 +1,4 @@
-class CarFormController < ApplicationController
+class CarFormsController < ApplicationController
   def new
     @car_form = CarForm.new
   end
@@ -6,7 +6,9 @@ class CarFormController < ApplicationController
   def create
     @car_form = CarForm.new(car_form_params)
 
+
     if @car_form.save
+      @car_form.user = current_user
       redirect_to root_path
     else
       render :new
@@ -23,7 +25,8 @@ class CarFormController < ApplicationController
       :email,
       :vehicle_type,
       :vehicle_identification_number,
-      :describe
+      :describe,
+      :user_id
     )
   end
 end

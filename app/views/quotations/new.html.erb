@@ -1,0 +1,178 @@
+<%= form_for(@quotation) do |f| %>
+  <% if @quotation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@quotation.errors.count, "error") %> prohibited this quotation from being saved:</h2>
+      <ul>
+        <% @quotation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<%# debugger %>
+  <div class="box-body">
+    <div class="row">
+      <div class="form-group col-12 col-md-6">
+        <label><%= t :choose_customer %></label>
+        <%= f.text_field :customer, value: @car_form.user&.first_name, class: "form-control", readonly: true %>
+      </div>
+
+      <div class="form-group col-12 col-md-6">
+        <label>Customer Email</label>
+        <%= f.email_field :contact_email, value: @car_form.email, class: "form-control", readonly: true %>
+      </div>
+
+      <div class="form-group col-12 col-md-6">
+        <label>Customer Phone</label>
+        <%= f.phone_field :phone, value: @car_form.phone_number, class: "form-control", readonly: true %>
+      </div>
+
+      <div class="form-group col-12 col-md-6">
+        <label>City</label>
+        <%= f.text_field :city, value: @car_form.city, class: "form-control", readonly: true %>
+      </div>
+    </div>
+
+    <!-- ... (rest of the form) ... -->
+
+    <div class="form-group">
+      <label>Quotation Items</label>
+      <table id="q-items">
+        <!-- ... (existing code for quotation items) ... -->
+      </table>
+      <%= link_to_add_association 'add line', f, :quotation_items, class: "btn btn-primary", id: "add_line", data: { "association-insertion-node" => "tbody.quotation_items", "association-insertion-method" => "append" } %>    </div>
+
+    <div class="form-group">
+      <label>Discount</label>
+      <%= f.text_field :discount, class: "form-control", pattern: "^[0-9]+([,.][0-9]+)?$" %>
+    </div>
+
+    <%# <div class="form-group">
+      <label>External Comment</label> %>
+      <%# f.text_area :external_comment, class: "form-control" %>
+    <%# </div> %>
+
+    <%# <div class="form-group"> %>
+      <%# f.fields_for :comments, Comment.new do |comment| %>
+        <%# render 'comments/form', :f => comment %>
+      <%# end %>
+    <%# </div> %>
+
+    <div class="btn-group">
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  var price = []
+  var quantity = []
+  var discount = []
+  var cell = []
+  $(document).ready(function () {
+
+    $('table tr').each(function () {
+      if ($(this).find('td:last-child').prev("td").prev("td").find("input").length > 0) {
+        price.push($(this).find('td:last-child').prev("td").prev("td").prev("td").find("input"))
+        //console.log($(this).prev("td").prev("td").find("input"))
+        quantity.push($(this).find('td:last-child').prev("td").prev('td').prev("td").prev("td").prev("td").prev(
+            "td")
+          .find("input"))
+        discount.push($(this).find('td:last-child').prev("td").prev('td').find("input"))
+        cell.push($(this).find('td:last-child').prev("td").find("input"))
+      }
+    });
+    calculate_total(price, quantity, discount, cell);
+
+    $('#add_line').click(function () {
+
+      mutationObserver.observe(document.documentElement, {
+        attributes: true,
+
+        characterData: true,
+
+        childList: true,
+
+        subtree: true,
+        childList: true,
+      });
+    });
+
+    function calculate_total(price1, quantity2, discount3, cell) {
+
+      //console.log(cell)
+      //var x =0;
+      function createfunc(x) {
+
+        if (cell[x]) {
+          price[x].on('change', function () {
+            cell[x].val(parseFloat(price[x].val()) * parseFloat(quantity[x].val()) - parseFloat(discount[x]
+              .val()))
+
+          })
+
+          quantity[x].on('change', function () {
+            cell[x].val(parseFloat(price[x].val()) * parseFloat(quantity[x].val()) - parseFloat(discount[x]
+              .val()))
+
+          })
+
+          discount[x].on('change', function () {
+            cell[x].val(parseFloat(price[x].val()) * parseFloat(quantity[x].val()) - parseFloat(discount[x]
+              .val()))
+            calculateSum()
+          })
+        }
+
+      }
+
+      for (var x = 0; x < price.length; x++) {
+        createfunc(x);
+      }
+
+    }
+
+    var mutationObserver = new MutationObserver(function (mutations) {
+
+      mutations.forEach(function (mutation) {
+        if (!mutation.addedNodes) return
+        if ($('table tr:last-child td:last-child').prev("td").prev("td").prev("td").find("input").length >
+          0) {
+          price.push($('table tr:last-child td:last-child').prev("td").prev("td").prev("td").find("input"))
+          //console.log($('table tr:last-child td:last-child').prev("td").prev("td").find("input"))
+          quantity.push($('table tr:last-child td:last-child').prev("td").prev('td').prev("td").prev("td")
+            .prev("td").prev("td")
+            .find("input"))
+          discount.push($('table tr:last-child td:last-child').prev("td").prev('td').find("input"))
+          cell.push($('table tr:last-child td:last-child').prev("td").find("input"))
+
+          calculate_total(price, quantity, discount, cell);
+        }
+
+
+      });
+
+    });
+    mutationObserver.disconnect();
+  });
+
+  function calculateSum() {
+    // Get all the input fields by class name
+    var fields = document.getElementsByClassName('item-discount');
+
+    var sum = 0;
+
+    // Loop through each input field
+    for (var i = 0; i < fields.length; i++) {
+      var fieldValue = parseFloat(fields[i].value);
+
+      // Add the field value to the sum if it is a valid number
+      if (!isNaN(fieldValue)) {
+        sum += fieldValue;
+      }
+    }
+
+    // Update the sum display
+    document.getElementById('quotation_discount').value = sum;
+  }
+</script>

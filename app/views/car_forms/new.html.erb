@@ -1,6 +1,6 @@
 <!-- app/views/car_form/new.html.erb -->
 
-<%= form_with(model: @car_form, url: car_form_index_path, method: :post) do |form| %>
+<%= form_with(model: @car_form, url: car_forms_path, method: :post) do |form| %>
   <!-- Display validation errors -->
   <% if @car_form.errors.any? %>
     <div id="error_explanation">
@@ -48,6 +48,8 @@
     <%= form.label :describe %>
     <%= form.text_area :describe %>
   </div>
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
 
   <!-- Submit button -->
   <div>
