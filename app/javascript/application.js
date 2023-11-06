@@ -4,3 +4,4 @@ import "controllers"
 //= require cocoon
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap

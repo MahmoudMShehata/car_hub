@@ -1,0 +1,89 @@
+.card {
+  position: relative;
+  background: #fff;
+  margin-bottom: 30px;
+  border-radius: 2px;
+  .card-header {
+    position: relative;
+    display: block;
+    padding: 20px 30px 10px 30px;
+    border-radius: 2px 2px 0 0;
+  }
+  .card-actions {
+    position: absolute;
+    right: 10px;
+    z-index: 2;
+    top: 15px;
+    > li {
+      display: inline-block;
+      vertical-align: baseline;
+
+      > a {
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        padding-top: 5px;
+      }
+    }
+    > a.btn {
+      margin-top: 5px;
+      margin-right: 10px;
+    }
+  }
+  .card-block {
+    padding: 30px 30px 26px 30px;
+  }
+}
+
+#dashboard .card {
+  min-height: 550px;
+}
+
+#account-card {
+  .card-header {
+    color: mat-white;
+    background-color: flat-wisteria;
+  }
+}
+
+#contact-card {
+  .card-header {
+    color: mat-white;
+    background-color: flat-alizarin;
+  }
+}
+
+#lead-card {
+  .card-header {
+    color: mat-white;
+    background-color: flat-orange;
+  }
+}
+
+#deal-card {
+  .card-header {
+    color: mat-white;
+    background-color: flat-nephritis;
+  }
+}
+
+#task-card {
+  .card-header {
+    color: mat-white;
+    background-color: mat-blue-gray;
+  }
+}
+
+#note-card {
+  .card-header {
+    color: mat-white;
+    background-color: mat-cyan;
+  }
+}
+
+#calendar-card {
+  .card-header {
+    color: mat-white;
+    background-color: mat-deep-orange;
+  }
+}

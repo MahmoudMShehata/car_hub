@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_31_112443) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_06_171308) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_31_112443) do
     t.decimal "discount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "car_form_id", null: false
+    t.index ["car_form_id"], name: "index_quotations_on_car_form_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -92,4 +94,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_31_112443) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "car_forms", "users"
   add_foreign_key "quotation_items", "quotations"
+  add_foreign_key "quotations", "car_forms"
 end
