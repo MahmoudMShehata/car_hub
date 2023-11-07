@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   
   resources :car_forms do
     get 'user_car_forms', on: :collection
+    post 'comments', to: 'car_forms#comment'
   end
   
   resources :admin do
@@ -15,6 +16,8 @@ Rails.application.routes.draw do
     delete 'delete_attachment', on: :member
   end
 
-  resources :quotations
+  resources :quotations do
+    put 'approval_and_rejection'
+  end
   resources :quotation_items
 end

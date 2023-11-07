@@ -23,7 +23,22 @@ class CarFormsController < ApplicationController
     @car_forms = current_user.car_forms.includes(:quotations)
   end
 
+  def comment
+    @car_form = CarForm.find(params[:car_form_id])
+    @comment = @car_form.comments.build(content: params[:quotation][:comments][:content])
+
+    if @comment.save
+      redirect_to @car_form
+    else
+      # Handle errors
+    end
+  end
+
   private
+
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
 
   def car_form_params
     params.require(:car_form).permit(

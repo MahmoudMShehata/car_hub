@@ -3,4 +3,5 @@ class CarForm < ApplicationRecord
   has_one_attached :attachment
   has_many :quotations
   belongs_to :user
+  has_many :comments, as: :commentable
 end

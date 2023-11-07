@@ -42,6 +42,18 @@ class QuotationsController < ApplicationController
     redirect_to quotations_url, notice: 'Quotation was successfully destroyed.'
   end
 
+  def approval_and_rejection
+    @quotation = Quotation.find(params[:quotation_id])
+
+    if params[:approved]
+      @quotation.update(approved_by_customer: true)
+        redirect_to @quotation.car_form, notice: "Car form approved."
+    else
+      @quotation.update(approved_by_customer: false)
+        redirect_to @quotation.car_form, notice: "Car form rejected."
+    end
+  end
+
   private
 
   # def set_quotation
@@ -50,7 +62,7 @@ class QuotationsController < ApplicationController
 
   def quotation_params
     params.require(:quotation).permit(
-      :authenticity_token, :discount, :car_form_id,
+      :authenticity_token, :discount, :car_form_id, :created_by,
       quotation_items_attributes: [:item_name, :item_description, :quantity, :unit_price, :total_price, :_destroy]
     )
   end

@@ -3,6 +3,7 @@
 <p><strong>ID:</strong> <%= @quotation.id %></p>
 <p><strong>Discount:</strong> <%= @quotation.discount %></p>
 <p><strong>Car Form ID:</strong> <%= @quotation.car_form_id %></p>
+<strong>Created By:</strong> <%= User.find(@quotation.created_by.to_i).first_name %><br>
 
 <h2>Car Form Details</h2>
 

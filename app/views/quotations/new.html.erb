@@ -71,6 +71,7 @@
     <%# </div> %>
 
     <%= f.hidden_field :car_form_id, value: params[:car_form_id] %>
+    <%= f.hidden_field :created_by, value: current_user.id %>
 
     <div class="btn-group">
       <%= f.submit "Submit", class: "btn btn-primary" %>
