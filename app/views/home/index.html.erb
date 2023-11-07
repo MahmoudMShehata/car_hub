@@ -9,4 +9,20 @@
   <%= link_to 'Create Car Quotation', new_car_form_path, class: 'create-quotation-button' %>
 
   <%= link_to 'Admin Panel', admin_index_path, class: 'create-quotation-button' %>
+
+  <!-- app/views/users/index.html.erb -->
+
+<h1>Welcome <%= current_user.first_name %>!</h1>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Your Car Forms</h5>
+    <p class="card-text">Total Car Forms: <%= @total_car_forms %></p>
+    <p class="card-text">Car Forms with Quotations: <%= @car_forms_with_quotations %></p>
+    <p class="card-text">Car Forms without Quotations: <%= @car_forms_without_quotations %></p>
+  </div>
+
+  <%= link_to 'Your Car Forms', user_car_forms_car_forms_path, class: 'btn btn-primary' %>
+</div>
+
 </section>

@@ -1,4 +1,8 @@
 class CarFormsController < ApplicationController
+  def show
+    @car_form = CarForm.find(params[:id])
+  end
+
   def new
     @car_form = CarForm.new
   end
@@ -13,6 +17,10 @@ class CarFormsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def user_car_forms
+    @car_forms = current_user.car_forms.includes(:quotations)
   end
 
   private

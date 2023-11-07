@@ -1,0 +1,30 @@
+<!-- app/views/car_forms/show.html.erb -->
+
+<h1>Car Form Details</h1>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><%= @car_form.vehicle_type %> - <%= @car_form.vehicle_identification_number %></h5>
+    <p class="card-text">
+      <strong>City:</strong> <%= @car_form.city %><br>
+      <strong>Address:</strong> <%= @car_form.address %><br>
+      <strong>Phone Number:</strong> <%= @car_form.phone_number %><br>
+      <strong>Email:</strong> <%= @car_form.email %><br>
+      <strong>Vehicle Type:</strong> <%= @car_form.vehicle_type %><br>
+      <strong>Vehicle Identification Number:</strong> <%= @car_form.vehicle_identification_number %><br>
+      <strong>Describe:</strong> <%= @car_form.describe %><br>
+      <strong>User ID:</strong> <%= @car_form.user_id %><br>
+
+      <% if @car_form.quotations.present? %>
+        <hr>
+        <h5>Quotation Details</h5>
+        <strong>Discount:</strong> <%# @car_form.quotation.discount %><br>
+        <!-- Add any other quotation details you want to display -->
+      <% else %>
+        <p>No quotation associated with this car form.</p>
+      <% end %>
+    </p>
+  </div>
+</div>
+
+<%= link_to 'Back', car_forms_path, class: 'btn btn-secondary mt-3' %>

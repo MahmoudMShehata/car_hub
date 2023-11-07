@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
-  resources :car_forms, only: [:new, :create]
+  
+  resources :car_forms do
+    get 'user_car_forms', on: :collection
+  end
   
   resources :admin do
     post 'attach_file', on: :member
