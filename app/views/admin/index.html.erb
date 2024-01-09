@@ -1,0 +1,22 @@
+<h1>Admin Panel - All Car Forms</h1>
+
+<% @car_forms.each do |car_form| %>
+  <div>
+    <strong>City:</strong> <%= car_form.city %><br>
+
+    <%= form_with(model: car_form, url: attach_file_admin_path(car_form), method: :post, multipart: true) do |form| %>
+      <%= form.hidden_field :id, value: car_form.id %>
+      <%= form.label "car_form[attachment]", 'Attach File' %>
+      <%= form.file_field "car_form[attachment]" %>
+      <%= form.submit 'Attach' %>
+    <% end %>
+
+    <% if car_form.attachment.attached? %>
+        <%= link_to 'Delete Attachment', delete_attachment_admin_path(car_form), method: :delete %>
+    <% end %>
+
+    <%= link_to "Prepare Quotation", new_quotation_path(car_form_id: car_form.id), class: "btn btn-primary" %>
+
+  </div>
+  <hr>
+<% end %>

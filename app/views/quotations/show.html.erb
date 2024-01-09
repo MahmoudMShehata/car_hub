@@ -1,0 +1,20 @@
+<h1>Quotation Details</h1>
+
+<p><strong>ID:</strong> <%= @quotation.id %></p>
+<p><strong>Discount:</strong> <%= @quotation.discount %></p>
+<p><strong>Car Form ID:</strong> <%= @quotation.car_form_id %></p>
+<strong>Created By:</strong> <%= User.find(@quotation.created_by.to_i).first_name %><br>
+
+<h2>Car Form Details</h2>
+
+<p><strong>ID:</strong> <%= @car_form.id %></p>
+<p><strong>City:</strong> <%= @car_form.city %></p>
+<p><strong>Address:</strong> <%= @car_form.address %></p>
+<p><strong>Phone Number:</strong> <%= @car_form.phone_number %></p>
+<p><strong>Email:</strong> <%= @car_form.email %></p>
+<p><strong>Vehicle Type:</strong> <%= @car_form.vehicle_type %></p>
+<p><strong>Vehicle Identification Number:</strong> <%= @car_form.vehicle_identification_number %></p>
+<p><strong>Description:</strong> <%= @car_form.describe %></p>
+<p><strong>User ID:</strong> <%= @car_form.user_id %></p>
+
+<%= link_to 'Back', admin_index_path %>

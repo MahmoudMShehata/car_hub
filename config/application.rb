@@ -8,15 +8,16 @@ Bundler.require(*Rails.groups)
 
 module CarHub
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
+    # Include Bootstrap assets in the asset pipeline
+    config.assets.paths << Rails.root.join('node_modules', 'bootstrap', 'dist', 'css')
+
+    # Autoload / Load paths for custom directories
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.eager_load_paths += %W(#{config.root}/lib)
+
+    # Other configurations...
   end
 end
+

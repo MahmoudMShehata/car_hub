@@ -1,0 +1,38 @@
+<!-- app/views/car_forms/user_car_forms.html.erb -->
+
+<h1>User Car Forms</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>City</th>
+      <th>Address</th>
+      <th>Phone Number</th>
+      <th>Email</th>
+      <th>Vehicle Type</th>
+      <th>Vehicle Identification Number</th>
+      <th>User ID</th>
+      <th>Quoted</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @car_forms.each do |car_form| %>
+      <tr>
+        <td><%= car_form.id %></td>
+        <td><%= car_form.city %></td>
+        <td><%= car_form.address %></td>
+        <td><%= car_form.phone_number %></td>
+        <td><%= car_form.email %></td>
+        <td><%= car_form.vehicle_type %></td>
+        <td><%= car_form.vehicle_identification_number %></td>
+        <td><%= car_form.user_id %></td>
+        <td><%= car_form.quotations.any? ? 'Yes' : 'No' %></td>
+        <td>
+          <%= link_to 'Show', car_form_path(car_form), class: 'btn btn-primary' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

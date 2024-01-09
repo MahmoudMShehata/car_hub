@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+/* app/assets/stylesheets/application.css */
+
+/* Custom styles for the sign-out button */
+.sign-out-button {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.create-quotation-button {
+  background-color: cyan;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+}
+
